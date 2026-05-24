@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Secure App</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background-color: white; padding: 3rem 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 100%; max-width: 500px; box-sizing: border-box; text-align: center; }
+        h2 { color: #111827; margin-top: 0; }
+        p { font-size: 1rem; color: #374151; margin-bottom: 2rem; }
+        .btn-logout { display: inline-block; background-color: #dc2626; color: white; padding: 0.5rem 1.5rem; border-radius: 4px; font-weight: bold; text-decoration: none; transition: background-color 0.2s; }
+        .btn-logout:hover { background-color: #b91c1c; }
+        .flash-list { background-color: #d1fae5; border: 1px solid #10b981; color: #065f46; padding: 0.75rem; border-radius: 4px; list-style-type: none; margin-bottom: 1rem; font-size: 0.875rem; text-align: left; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Dashboard</h2>
+        
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flash-list">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <!-- Injects the username securely from the backend session -->
+        <p>Welcome to your Secure Dashboard, <strong>{{ current_user.username }}</strong>!</p>
+        
+        <p>You have successfully logged in.</p>
+        
+        <!-- Links to the logout route in the backend -->
+        <a href="{{ url_for('logout') }}" class="btn-logout">Logout</a>
+    </div>
+</body>
+</html>
